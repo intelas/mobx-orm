@@ -55,7 +55,24 @@
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
     }
 
+    typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+        var e = new Error(message);
+        return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+    };
+
+    const MOBX_ORM_FILTER_BRAND = 'mobx-orm-filter';
     class Filter {
+        constructor() {
+            /**
+             * Type brand to distinguish from api filters
+             */
+            Object.defineProperty(this, "__filterBrand", {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: MOBX_ORM_FILTER_BRAND
+            });
+        }
     }
 
     // Note: any type can be === null
@@ -2348,6 +2365,17 @@
     }
 
     class XFilter {
+        constructor() {
+            /**
+             * Type brand to distinguish from api filters
+             */
+            Object.defineProperty(this, "__filterBrand", {
+                enumerable: true,
+                configurable: true,
+                writable: true,
+                value: MOBX_ORM_FILTER_BRAND
+            });
+        }
     }
 
     class BooleanInput extends Input {
@@ -3053,6 +3081,7 @@
     exports.LTE_Filter = LTE_Filter;
     exports.LT_Filter = LT_Filter;
     exports.LocalAdapter = LocalAdapter;
+    exports.MOBX_ORM_FILTER_BRAND = MOBX_ORM_FILTER_BRAND;
     exports.Model = Model;
     exports.NOT_EQ = NOT_EQ;
     exports.NOT_EQ_Filter = NOT_EQ_Filter;

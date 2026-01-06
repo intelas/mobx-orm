@@ -48,7 +48,24 @@ function __metadata(metadataKey, metadataValue) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
 
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+const MOBX_ORM_FILTER_BRAND = 'mobx-orm-filter';
 class Filter {
+    constructor() {
+        /**
+         * Type brand to distinguish from api filters
+         */
+        Object.defineProperty(this, "__filterBrand", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: MOBX_ORM_FILTER_BRAND
+        });
+    }
 }
 
 // Note: any type can be === null
@@ -2341,6 +2358,17 @@ function many(remote_model, remote_foreign_id_name) {
 }
 
 class XFilter {
+    constructor() {
+        /**
+         * Type brand to distinguish from api filters
+         */
+        Object.defineProperty(this, "__filterBrand", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: MOBX_ORM_FILTER_BRAND
+        });
+    }
 }
 
 class BooleanInput extends Input {
@@ -3010,5 +3038,5 @@ function local() {
     };
 }
 
-export { AND, AND_Filter, ASC, Adapter, ArrayInput, ArrayNumberInput, ArrayStringInput, BooleanInput, ComboFilter, DESC, DISPOSER_AUTOUPDATE, DateInput, DateTimeInput, EQ, EQV, EQV_Filter, EQ_Filter, EnumInput, Filter, Form, GT, GTE, GTE_Filter, GT_Filter, ILIKE, ILIKE_Filter, IN, IN_Filter, Input, LIKE, LIKE_Filter, LT, LTE, LTE_Filter, LT_Filter, LocalAdapter, Model, NOT_EQ, NOT_EQ_Filter, NumberInput, OrderByInput, Query, QueryBase, QueryPage, QueryX, QueryXCacheSync, QueryXDistinct, QueryXPage, QueryXRaw, QueryXRawPage, QueryXStream, ReadOnlyModel, SingleFilter, StringInput, ValueType, XAND, XAND_Filter, XComboFilter, XEQ, XEQV, XEQV_Filter, XEQ_Filter, XFilter, XGT, XGTE, XGTE_Filter, XGT_Filter, XILIKE, XILIKE_Filter, XIN, XIN_Filter, XLIKE, XLIKE_Filter, XLT, XLTE, XLTE_Filter, XLT_Filter, XNOT_EQ, XNOT_EQ_Filter, XSingleFilter, autoResetArrayOfIDs, autoResetArrayToEmpty, autoResetId, config, field, field_field, foreign, local, local_store, many, match$1 as match, model, one, waitIsFalse, waitIsTrue };
+export { AND, AND_Filter, ASC, Adapter, ArrayInput, ArrayNumberInput, ArrayStringInput, BooleanInput, ComboFilter, DESC, DISPOSER_AUTOUPDATE, DateInput, DateTimeInput, EQ, EQV, EQV_Filter, EQ_Filter, EnumInput, Filter, Form, GT, GTE, GTE_Filter, GT_Filter, ILIKE, ILIKE_Filter, IN, IN_Filter, Input, LIKE, LIKE_Filter, LT, LTE, LTE_Filter, LT_Filter, LocalAdapter, MOBX_ORM_FILTER_BRAND, Model, NOT_EQ, NOT_EQ_Filter, NumberInput, OrderByInput, Query, QueryBase, QueryPage, QueryX, QueryXCacheSync, QueryXDistinct, QueryXPage, QueryXRaw, QueryXRawPage, QueryXStream, ReadOnlyModel, SingleFilter, StringInput, ValueType, XAND, XAND_Filter, XComboFilter, XEQ, XEQV, XEQV_Filter, XEQ_Filter, XFilter, XGT, XGTE, XGTE_Filter, XGT_Filter, XILIKE, XILIKE_Filter, XIN, XIN_Filter, XLIKE, XLIKE_Filter, XLT, XLTE, XLTE_Filter, XLT_Filter, XNOT_EQ, XNOT_EQ_Filter, XSingleFilter, autoResetArrayOfIDs, autoResetArrayToEmpty, autoResetId, config, field, field_field, foreign, local, local_store, many, match$1 as match, model, one, waitIsFalse, waitIsTrue };
 //# sourceMappingURL=mobx-orm.es2015.js.map

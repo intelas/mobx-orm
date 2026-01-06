@@ -1,15 +1,24 @@
 import { Selector as Selector$1 } from '@/types';
 
+declare const MOBX_ORM_FILTER_BRAND: "mobx-orm-filter";
 declare abstract class Filter {
     abstract get URLSearchParams(): URLSearchParams;
     abstract setFromURI(uri: string): void;
     abstract isMatch(obj: any): boolean;
+    /**
+     * Type brand to distinguish from api filters
+     */
+    readonly __filterBrand: typeof MOBX_ORM_FILTER_BRAND;
 }
 
 declare abstract class XFilter {
     abstract get URLSearchParams(): URLSearchParams;
     abstract isMatch(obj: any): boolean;
     abstract get isReady(): boolean;
+    /**
+     * Type brand to distinguish from api filters
+     */
+    readonly __filterBrand: typeof MOBX_ORM_FILTER_BRAND;
 }
 
 declare class OrderByInput extends Input<ORDER_BY> {
@@ -649,4 +658,4 @@ declare function many(remote_model: any, remote_foreign_id_name?: string): (cls:
 declare function waitIsTrue(obj: any, field: string): Promise<Boolean>;
 declare function waitIsFalse(obj: any, field: string): Promise<Boolean>;
 
-export { AND, AND_Filter, ASC, Adapter, ArrayInput, ArrayNumberInput, ArrayStringInput, BooleanInput, ComboFilter, DESC, DISPOSER_AUTOUPDATE, DateInput, DateTimeInput, EQ, EQV, EQV_Filter, EQ_Filter, EnumInput, Filter, Form, GT, GTE, GTE_Filter, GT_Filter, ILIKE, ILIKE_Filter, IN, IN_Filter, Input, InputConstructorArgs, LIKE, LIKE_Filter, LT, LTE, LTE_Filter, LT_Filter, LocalAdapter, Model, NOT_EQ, NOT_EQ_Filter, NumberInput, ORDER_BY, OrderByInput, Query, QueryBase, QueryPage, QueryX, QueryXCacheSync, QueryXDistinct, QueryXPage, QueryXProps, QueryXRaw, QueryXRawPage, QueryXStream, RawData, RawObject, ReadOnlyModel, Selector, SingleFilter, StringInput, ValueType, XAND, XAND_Filter, XComboFilter, XEQ, XEQV, XEQV_Filter, XEQ_Filter, XFilter, XGT, XGTE, XGTE_Filter, XGT_Filter, XILIKE, XILIKE_Filter, XIN, XIN_Filter, XLIKE, XLIKE_Filter, XLT, XLTE, XLTE_Filter, XLT_Filter, XNOT_EQ, XNOT_EQ_Filter, XSingleFilter, autoResetArrayOfIDs, autoResetArrayToEmpty, autoResetId, config, field, field_field, foreign, local, local_store, many, match, model, one, waitIsFalse, waitIsTrue };
+export { AND, AND_Filter, ASC, Adapter, ArrayInput, ArrayNumberInput, ArrayStringInput, BooleanInput, ComboFilter, DESC, DISPOSER_AUTOUPDATE, DateInput, DateTimeInput, EQ, EQV, EQV_Filter, EQ_Filter, EnumInput, Filter, Form, GT, GTE, GTE_Filter, GT_Filter, ILIKE, ILIKE_Filter, IN, IN_Filter, Input, InputConstructorArgs, LIKE, LIKE_Filter, LT, LTE, LTE_Filter, LT_Filter, LocalAdapter, MOBX_ORM_FILTER_BRAND, Model, NOT_EQ, NOT_EQ_Filter, NumberInput, ORDER_BY, OrderByInput, Query, QueryBase, QueryPage, QueryX, QueryXCacheSync, QueryXDistinct, QueryXPage, QueryXProps, QueryXRaw, QueryXRawPage, QueryXStream, RawData, RawObject, ReadOnlyModel, Selector, SingleFilter, StringInput, ValueType, XAND, XAND_Filter, XComboFilter, XEQ, XEQV, XEQV_Filter, XEQ_Filter, XFilter, XGT, XGTE, XGTE_Filter, XGT_Filter, XILIKE, XILIKE_Filter, XIN, XIN_Filter, XLIKE, XLIKE_Filter, XLT, XLTE, XLTE_Filter, XLT_Filter, XNOT_EQ, XNOT_EQ_Filter, XSingleFilter, autoResetArrayOfIDs, autoResetArrayToEmpty, autoResetId, config, field, field_field, foreign, local, local_store, many, match, model, one, waitIsFalse, waitIsTrue };
